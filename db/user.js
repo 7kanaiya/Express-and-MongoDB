@@ -5,8 +5,8 @@ let userSchema = new mongoose.Schema({
     lastName:{type:String, min:4, max:200, required:true},
     address:{ type:String, required:true},
     userLogin:{
-        emailId:{ type: String,require:true,unique:true},
-        password:{ type: String, require:true}
+        emailId:{ type: String,required:true,unique:true},
+        password:{ type: String, required:true}
     }
 });
 

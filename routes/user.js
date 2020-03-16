@@ -32,7 +32,7 @@ router.post("/user/newuser", async (req,res)=>{
         userLogin: req.body.userLogin //when there is nested data request only the parent one only no need to request child
     });
     let data =await newData.save();
-    req.send({message:"Thank you",d:data} );
+    res.send({message:"Thank you",d:data} );
 });
 
 function validationError(error){
@@ -53,14 +53,14 @@ function validationError(error){
 router.put("/user/updateuser/:id",async (req,res)=>{
     let user = await model.findById(req.params.id);
     if(!user){
-        req.send(404).send({message:"Invalid id"});
+        res.send(404).send({message:"Invalid id"});
     }
     let {error} = validationError(req.body);
     if(error){return res.send(error.details[0].message)};
     user.firstName = req.body.firstName;
     user.lastName = req.body.lastName;
     await user.save();
-    req.send({message:"User data updated"});
+    res.send({message:"User data updated"});
 });
 
 //Remove user
@@ -68,9 +68,9 @@ router.put("/user/updateuser/:id",async (req,res)=>{
 router.delete("/user/removeuser/:id",async (req,res)=>{
     let user = await model.findByIdAndRemove(req.params.id);
     if(!user){
-        req.send(404).send({message:"Invalid id"});
+        res.send(404).send({message:"Invalid id"});
     }
-    req.send({message:"User data deleted"});
+    res.send({message:"User data deleted"});
 });
 
 
