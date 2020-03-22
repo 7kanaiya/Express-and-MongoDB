@@ -3,10 +3,13 @@ let mongoose = require("mongoose");
 let app = express();
 let user = require("./routes/user");
 let register = require("./routes/register")
+let auth = require("./routes/auth/user");
 let port = process.env.PORT || 4500;
 app.use(express.json);
 app.use("/api/users",user); //when creating custom we have to give the initial path it will then check for the model external available
 app.use("/api/register",register);
+app.use("/api",auth);
+
 
 mongoose
     .connect("mongodb://localhost/kan",{useNewUrlParser=true, useUnifiedTopology = true})
